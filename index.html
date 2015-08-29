@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset='utf-8'>
@@ -24,6 +24,16 @@
         /* "fonts/Font license - Daniel.pdf" */
         /* "fonts/danielbd-fix.md" */
       }
+      .sequence g.editing  {
+        outline-color: green;
+        outline-style: dotted;
+        outline-width: thin;
+    }
+    .sequence g[data-lineno]:hover  {
+        outline-color: blue;
+        outline-style: dotted;
+        outline-width: thin;
+    }
     </style>
   </head>
 
@@ -190,7 +200,6 @@ $(&quot;.diagram&quot;).sequenceDiagram({theme: &#39;hand&#39;});
     <script src="js/underscore-min.js"></script>
     <script src="js/raphael-min.js"></script>
     <script src="js/snap.svg-min.js"></script>
-    <script src="js/webfont.js"></script>
 
     <script src="js/sequence-diagram-min.js"></script>
     <!--script src="../js-sequence-diagrams/build/sequence-diagram.js"></script-->
@@ -223,6 +232,31 @@ $(&quot;.diagram&quot;).sequenceDiagram({theme: &#39;hand&#39;});
           a.attr("download", "diagram.svg"); // TODO I could put title here
           a.attr("href", "data:image/svg+xml," + encodeURIComponent(xml));
         });
+        editor.on("changeSelection", function () {
+          diagram_div.find("g.editing").each(function (i, e) {
+            $(e).attr('class', function (index, classNames) {
+              return classNames.replace('editing', '');
+            });
+          });
+          var selection = editor.getSelection();
+          var cursorStart = selection.lead.row;
+          var cursorEnd = selection.lead.row;
+          if (selection.isMultiLine()) {
+              cursorEnd = selection.anchor.row;
+              if (cursorEnd < cursorStart) {
+                  cursorEnd -= cursorStart;
+                  cursorStart += cursorEnd;
+                  cursorEnd = cursorStart - cursorEnd;
+              }
+          }
+          for (var cursorRow = cursorStart; cursorRow <= cursorEnd; cursorRow++) {
+            diagram_div.find("g[data-lineno='" + cursorRow + "']").each(function (i, e) {
+              $(e).attr('class', function (index, classNames) {
+                return classNames + ' editing';
+              });
+            });
+          }
+        });
 
         theme_div.change(on_change);
         on_change();
@@ -243,6 +277,14 @@ $(&quot;.diagram&quot;).sequenceDiagram({theme: &#39;hand&#39;});
 
             // Draw
             diagram.drawSVG(diagram_div.get(0), options);
+
+            diagram_div.find("g[data-lineno]").each(function (i, e) {
+              e.onclick = function () {
+                var lineNo = Number(e.attributes["data-lineno"].value);
+                editor.moveCursorTo(lineNo, 0);
+                editor.focus();
+              };
+            });
 
           } catch(err) {
             var annotation = {
