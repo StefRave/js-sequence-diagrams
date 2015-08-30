@@ -25,14 +25,10 @@
         /* "fonts/danielbd-fix.md" */
       }
       .sequence g.editing  {
-        outline-color: green;
-        outline-style: dotted;
-        outline-width: thin;
+       filter:  url(#sequenceEditing);
     }
     .sequence g[data-lineno]:hover  {
-        outline-color: blue;
-        outline-style: dotted;
-        outline-width: thin;
+        filter:  url(#sequenceHover);
     }
     </style>
   </head>
@@ -281,12 +277,41 @@ $(&quot;.diagram&quot;).sequenceDiagram({theme: &#39;hand&#39;});
             diagram_div.find("g[data-lineno]").each(function (i, e) {
               e.onclick = function () {
                 var lineNo = Number(e.attributes["data-lineno"].value);
+                editor.clearSelection();
                 editor.moveCursorTo(lineNo, 0);
                 editor.focus();
               };
             });
+            function makeSVG(tag, attrs) {
+                var el= document.createElementNS('http://www.w3.org/2000/svg', tag);
+                for (var k in attrs)
+                    el.setAttribute(k, attrs[k]);
+                return el;
+            }
 
-          } catch(err) {
+            function addDropShadowFilter(name, color) {
+              var defs = diagram_div.find("defs").get(0);
+              var filter = makeSVG("filter", { id: name, height: "130%" });
+              var feGaussianBlur = makeSVG("feGaussianBlur", { in: "SourceAlpha", stdDeviation: "3" });
+              var feFlood = makeSVG("feFlood", { "flood-color": color });
+              var feComposite = makeSVG("feComposite", { in2: "offsetblur", operator: "in" });
+              var feOffset = makeSVG("feOffset", { dx: "0", dy: "0", result: "offsetblur" });
+              var feMerge = makeSVG("feMerge", {});
+              var feMergeNode1 = makeSVG("feMergeNode", {});
+              var feMergeNode2 = makeSVG("feMergeNode", { in: "SourceGraphic" });
+              feMerge.appendChild(feMergeNode1);
+              feMerge.appendChild(feMergeNode2);
+              filter.appendChild(feGaussianBlur);
+              filter.appendChild(feOffset);
+              filter.appendChild(feFlood);
+              filter.appendChild(feComposite);
+              filter.appendChild(feMerge);
+              defs.appendChild(filter);
+            }
+
+            addDropShadowFilter("sequenceEditing", "green");
+            addDropShadowFilter("sequenceHover", "blue");
+          } catch (err) {
             var annotation = {
               type: "error", // also warning and information
               column: 0,
