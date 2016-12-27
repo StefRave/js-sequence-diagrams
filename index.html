@@ -4,6 +4,7 @@
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="google-site-verification" content="ozgnqb925nLPkhlk9qBcSvdsrY8xIZyrpnBOoDyY1hE" />
     <link href="https://fonts.googleapis.com/css?family=Architects+Daughter" rel="stylesheet" type="text/css">
 
     <!--[if lt IE 9]>
@@ -11,19 +12,21 @@
     <![endif]-->
 
     <link rel="stylesheet" type="text/css" href="css/style.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="css/sequence-diagram-min.css" media="screen" />
 
     <title>js-sequence-diagrams by bramp</title>
     <link rel="canonical" href="https://bramp.github.io/js-sequence-diagrams/" />
 
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-36551491-1', 'auto');
+    ga('send', 'pageview');
+    </script>
     <style type="text/css">
-      @font-face {
-        font-family: 'Daniel';
-        font-style: normal;
-        font-weight: normal;
-        src: url('fonts/danielbd-fix.otf') format('opentype');
-        /* "fonts/Font license - Daniel.pdf" */
-        /* "fonts/danielbd-fix.md" */
-      }
       .sequence g.editing  {
        filter:  url(#sequenceEditing);
     }
@@ -79,7 +82,7 @@ Andrew->>China: I am good thanks!</div>
       <section id="info">
         <h3>Intro</h3>
         <p>A simple javascript library to turn text into vector <a href="http://en.wikipedia.org/wiki/Sequence_diagram">UML sequence diagrams</a>.
-          Heavily inspired by <a href="http://www.websequencediagrams.com/">websequencediagrams.com</a>, who offer a serverside solution. We use <a href="http://zaach.github.com/jison/">Jison</a> to parse the text, and <a href="http://raphaeljs.com/">Raphaël</a> to draw the image.</p>
+          Heavily inspired by <a href="http://www.websequencediagrams.com/">websequencediagrams.com</a>, who offer a serverside solution. We use <a href="http://zaach.github.com/jison/">Jison</a> to parse the text, and <a href="http://snapsvg.io/">Snap.svg</a> to draw the image.</p>
       </section>
       <section id="examples">
         <h3>Examples</h3>
@@ -155,10 +158,14 @@ Note right of A: By listing the participants\n you can change their order</div>
       </section>
       <section id="usage">
         <h3>Usage</h3>
-        <p>js-sequence-diagrams depends on <a href="http://raphaeljs.com/">Raphaël</a> and <a href="http://underscorejs.org/">Underscore.js</a> (we are <a href="http://lodash.com/">lodash</a> compatible). To use include the following:
-        <pre>&lt;script src=&quot;<a href="bower_components/raphael/raphael-min.js">raphael-min.js</a>&quot;&gt;&lt;/script&gt;
-&lt;script src=&quot;<a href="bower_components/underscore/underscore-min.js">underscore-min.js</a>&quot;&gt;&lt;/script&gt;
-&lt;script src=&quot;<a href="bower_components/js-sequence-diagrams/build/sequence-diagram-min.js">sequence-diagram-min.js</a>&quot;&gt;&lt;/script&gt;
+        <p>js-sequence-diagrams depends on <a href="http://http://snapsvg.io/">Snap.svg</a> and <a href="http://underscorejs.org/">Underscore.js</a> (or <a href="http://lodash.com/">lodash</a>). You can download all these files manually, or use "<a href="http://bower.io/">bower</a> install bramp/js-sequence-diagrams".</p>
+        <p>
+
+        Then include the following HTML:
+        <pre>&lt;script src=&quot;<a href="js/webfont.js">webfont.js</a>&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;<a href="js/snap.svg-min.js">snap.svg-min.js</a>&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;<a href="js/underscore-min.js">underscore-min.js</a>&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;<a href="js/sequence-diagram-min.js">sequence-diagram-min.js</a>&quot;&gt;&lt;/script&gt;
 </pre>
 and now you have two options. You can manually parse the text:
 <pre>
@@ -178,86 +185,62 @@ $(&quot;.diagram&quot;).sequenceDiagram({theme: &#39;hand&#39;});
 </pre>
 
 </p>
+<p>More documentation is in the official <a href="https://github.com/bramp/js-sequence-diagrams/blob/master/README.md">README.md</a></p>
+
       </section>
       </div>
 
     <footer>
       <hr />
       <div class="inner">
-        by <a href="http://bramp.net">Andrew Brampton</a> - <a href="https://github.com/bramp">github</a> - <a href="https://twitter.com/TheBramp">@TheBramp</a>
+        by <a href="https://bramp.net">Andrew Brampton</a> - <a href="https://github.com/bramp">github</a> - <a href="https://twitter.com/TheBramp">@TheBramp</a>
       </div>
     </footer>
 
     <script src="js/jquery.min.js"></script>
 
     <!-- Needed for the text editor -->
-    <script src="https://d1n0x3qji82z53.cloudfront.net/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.5/ace.js" type="text/javascript" charset="utf-8"></script>
 
-    <script src="js/underscore-min.js"></script>
-    <script src="js/raphael-min.js"></script>
+    <script src="js/webfont.js"></script>
     <script src="js/snap.svg-min.js"></script>
+    <script src="js/underscore-min.js"></script>
+    <script src="js/sequence-diagram-snap-min.js"></script>
 
-    <script src="js/sequence-diagram-min.js"></script>
-    <!--script src="../js-sequence-diagrams/build/sequence-diagram.js"></script-->
     <script src="js/svginnerhtml.min.js"></script>
-
     <script type="text/javascript">
 
-      function setup_editor(div) {
 
-        var editor_div = div.find(".editor");
+    $(function () {
+      // Example diagrams
+      //$('.diagram').sequenceDiagram();
+
+      // Setup all the editors
+      setup_editor($('#demo'));
+      setup_editor($('#example1'));
+      setup_editor($('#example2'));
+      setup_editor($('#example3'));
+
+      function setup_editor(div) {
         var diagram_div = div.find(".diagram");
         var theme_div = div.find(".theme");
         var download_link = div.find('.download');
 
-        // Setup the editor diagram
-        var editor = ace.edit(editor_div.get(0));
-        editor.setTheme("ace/theme/crimson_editor");
-        editor.getSession().setMode("ace/mode/asciidoc");
-        editor.getSession().on('change', _.debounce(on_change, 100));
+        var editor = ace.edit(div.find(".editor").get(0));
+        setupEditor();
+        setupDownloadLink(div.first('.download').get(0));
 
-        download_link.click(function(ev) {
-          var svg = diagram_div.find('svg')[0];
-          var width = parseInt(svg.width.baseVal.value);
-          var height = parseInt(svg.height.baseVal.value);
-          var classes = svg.attributes["class"].value;
-          var data = editor.getValue();
-          var xml = '<?xml version="1.0" encoding="utf-8" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd"><svg xmlns="http://www.w3.org/2000/svg" width="' + width + '" height="' + height + '" class="' + classes + '"  xmlns:xlink="http://www.w3.org/1999/xlink"><source><![CDATA[' + data + ']]></source>' + svg.innerHTML + '</svg>';
 
-          var a = $(this);
-          a.attr("download", "diagram.svg"); // TODO I could put title here
-          a.attr("href", "data:image/svg+xml," + encodeURIComponent(xml));
-        });
-        editor.on("changeSelection", function () {
-          diagram_div.find("g.editing").each(function (i, e) {
-            $(e).attr('class', function (index, classNames) {
-              return classNames.replace('editing', '');
-            });
+        handleMutationWhenElementAddedToNode(diagram_div.get(0),
+         function () {
+            addClickHandlerToSvgGroupToSelectLineInEditor();
+            modifySvgForHowerAndSelectionEffects();
           });
-          var selection = editor.getSelection();
-          var cursorStart = selection.lead.row;
-          var cursorEnd = selection.lead.row;
-          if (selection.isMultiLine()) {
-              cursorEnd = selection.anchor.row;
-              if (cursorEnd < cursorStart) {
-                  cursorEnd -= cursorStart;
-                  cursorStart += cursorEnd;
-                  cursorEnd = cursorStart - cursorEnd;
-              }
-          }
-          for (var cursorRow = cursorStart; cursorRow <= cursorEnd; cursorRow++) {
-            diagram_div.find("g[data-lineno='" + cursorRow + "']").each(function (i, e) {
-              $(e).attr('class', function (index, classNames) {
-                return classNames + ' editing';
-              });
-            });
-          }
-        });
 
-        theme_div.change(on_change);
-        on_change();
+        theme_div.change(drawSvgAndAddToDiv);
+        drawSvgAndAddToDiv();
 
-        function on_change() {
+        function drawSvgAndAddToDiv() {
           try {
             var diagram = Diagram.parse(editor.getValue());
 
@@ -273,44 +256,6 @@ $(&quot;.diagram&quot;).sequenceDiagram({theme: &#39;hand&#39;});
 
             // Draw
             diagram.drawSVG(diagram_div.get(0), options);
-
-            diagram_div.find("g[data-lineno]").each(function (i, e) {
-              e.onclick = function () {
-                var lineNo = Number(e.attributes["data-lineno"].value);
-                editor.clearSelection();
-                editor.moveCursorTo(lineNo, 0);
-                editor.focus();
-              };
-            });
-            function makeSVG(tag, attrs) {
-                var el= document.createElementNS('http://www.w3.org/2000/svg', tag);
-                for (var k in attrs)
-                    el.setAttribute(k, attrs[k]);
-                return el;
-            }
-
-            function addDropShadowFilter(name, color) {
-              var defs = diagram_div.find("defs").get(0);
-              var filter = makeSVG("filter", { id: name, height: "130%" });
-              var feGaussianBlur = makeSVG("feGaussianBlur", { in: "SourceAlpha", stdDeviation: "3" });
-              var feFlood = makeSVG("feFlood", { "flood-color": color });
-              var feComposite = makeSVG("feComposite", { in2: "offsetblur", operator: "in" });
-              var feOffset = makeSVG("feOffset", { dx: "0", dy: "0", result: "offsetblur" });
-              var feMerge = makeSVG("feMerge", {});
-              var feMergeNode1 = makeSVG("feMergeNode", {});
-              var feMergeNode2 = makeSVG("feMergeNode", { in: "SourceGraphic" });
-              feMerge.appendChild(feMergeNode1);
-              feMerge.appendChild(feMergeNode2);
-              filter.appendChild(feGaussianBlur);
-              filter.appendChild(feOffset);
-              filter.appendChild(feFlood);
-              filter.appendChild(feComposite);
-              filter.appendChild(feMerge);
-              defs.appendChild(filter);
-            }
-
-            addDropShadowFilter("sequenceEditing", "green");
-            addDropShadowFilter("sequenceHover", "blue");
           } catch (err) {
             var annotation = {
               type: "error", // also warning and information
@@ -319,37 +264,133 @@ $(&quot;.diagram&quot;).sequenceDiagram({theme: &#39;hand&#39;});
               text: err.message
             };
             if (err instanceof Diagram.ParseError) {
-              annotation.row    = err.loc.first_line - 1;
+              annotation.row = err.loc.first_line - 1;
               annotation.column = err.loc.first_column;
             }
             editor.getSession().setAnnotations([annotation]);
             throw err;
           }
         }
+
+        function setupEditor() {
+          editor.setTheme("ace/theme/crimson_editor");
+          editor.getSession().setMode("ace/mode/asciidoc");
+          editor.getSession().on('change', _.debounce(drawSvgAndAddToDiv, 100));
+
+          editor.on("changeSelection", function () {
+            var selection = editor.getSelection();
+            var cursorStart = selection.lead.row + 1;
+            var cursorEnd = selection.lead.row + 1;
+            if (selection.isMultiLine()) {
+              cursorEnd = selection.anchor.row;
+              if (cursorEnd < cursorStart) {
+                cursorEnd -= cursorStart;
+                cursorStart += cursorEnd;
+                cursorEnd = cursorStart - cursorEnd;
+              }
+            }
+            removeEditingClassFromSvgGroups();
+            addEditingClassToSvgGroups(cursorStart, cursorEnd);
+          });
+        }
+
+        function setupDownloadLink(download_div) {
+          download_div.click(function (ev) {
+            var svg = diagram_div.find('svg')[0];
+            var width = parseInt(svg.width.baseVal.value);
+            var height = parseInt(svg.height.baseVal.value);
+            var classes = svg.attributes["class"].value;
+            var data = editor.getValue();
+            var xml = '<?xml version="1.0" encoding="utf-8" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd"><svg xmlns="http://www.w3.org/2000/svg" width="' + width + '" height="' + height + '" class="' + classes + '"  xmlns:xlink="http://www.w3.org/1999/xlink"><source><![CDATA[' + data + ']]></source>' + svg.innerHTML + '</svg>';
+
+            var a = $(this);
+            a.attr("download", "diagram.svg"); // TODO I could put title here
+            a.attr("href", "data:image/svg+xml," + encodeURIComponent(xml));
+          });
+        }
+
+        function addClickHandlerToSvgGroupToSelectLineInEditor() {
+          diagram_div.find("g[data-lineno]").each(function (i, e) {
+            e.onclick = function () {
+              var lineNo = Number(e.attributes["data-lineno"].value);
+              editor.clearSelection();
+              editor.moveCursorTo(lineNo - 1, 0);
+              _.debounce(editor.focus, 10);
+            };
+          });
+        }
+
+        function removeEditingClassFromSvgGroups() {
+          diagram_div.find("g.editing").each(function (i, e) {
+            $(e).attr('class', function (index, classNames) {
+              return classNames.replace('editing', '');
+            });
+          });
+        };
+        function addEditingClassToSvgGroups(rowStart, rowEnd) {
+          for (var row = rowStart; row <= rowEnd; row++) {
+            diagram_div.find("g[data-lineno='" + row + "']").each(function (i, e) {
+              $(e).attr('class', function (index, classNames) {
+                return classNames + ' editing';
+              });
+            });
+          }
+        }
+
+        function modifySvgForHowerAndSelectionEffects() {
+          addDropShadowFilterToSvg("sequenceEditing", "green");
+          addDropShadowFilterToSvg("sequenceHover", "blue");
+
+          function createSvgElement(tag, attrs) {
+            var el = document.createElementNS('http://www.w3.org/2000/svg', tag);
+            for (var k in attrs)
+              el.setAttribute(k, attrs[k]);
+            return el;
+          }
+
+          function addDropShadowFilterToSvg(name, color) {
+            var defs = diagram_div.find("defs").get(0);
+            var filter = createSvgElement("filter", { id: name, height: "130%" });
+            var feGaussianBlur = createSvgElement("feGaussianBlur", { in: "SourceAlpha", stdDeviation: "3" });
+            var feFlood = createSvgElement("feFlood", { "flood-color": color });
+            var feComposite = createSvgElement("feComposite", { in2: "offsetblur", operator: "in" });
+            var feOffset = createSvgElement("feOffset", { dx: "0", dy: "0", result: "offsetblur" });
+            var feMerge = createSvgElement("feMerge", {});
+            var feMergeNode1 = createSvgElement("feMergeNode", {});
+            var feMergeNode2 = createSvgElement("feMergeNode", { in: "SourceGraphic" });
+            feMerge.appendChild(feMergeNode1);
+            feMerge.appendChild(feMergeNode2);
+            filter.appendChild(feGaussianBlur);
+            filter.appendChild(feOffset);
+            filter.appendChild(feFlood);
+            filter.appendChild(feComposite);
+            filter.appendChild(feMerge);
+            defs.appendChild(filter);
+          }
+        }
+
+        function handleMutationWhenElementAddedToNode(node, onDivAdded) {
+          var myObserver = new window.MutationObserver(mutationHandler);
+
+          myObserver.observe(node, { childList: true });
+
+          function mutationHandler(mutationRecords) {
+            console.info("mutationHandler:");
+            var itemAdded = false;
+            mutationRecords.forEach(function (mutation) {
+              if (mutation.addedNodes.length > 0) {
+                itemAdded = true;
+              }
+            });
+            if (itemAdded) {
+              onDivAdded();
+            }
+          }
+        }
       }
-    
-      $(window).load(function() {
-        // Example diagrams
-        //$('.diagram').sequenceDiagram();
+    });
 
-        // Setup all the editors
-        setup_editor($('#demo'));
-        setup_editor($('#example1'));
-        setup_editor($('#example2'));
-        setup_editor($('#example3'));
-      });
-    </script>
-
-    <script type="text/javascript">
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-36551491-1']);
-      _gaq.push(['_trackPageview']);
-
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
     </script>
   </body>
+
 </html>
