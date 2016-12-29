@@ -282,7 +282,7 @@ $(&quot;.diagram&quot;).sequenceDiagram({theme: &#39;hand&#39;});
             var cursorStart = selection.lead.row + 1;
             var cursorEnd = selection.lead.row + 1;
             if (selection.isMultiLine()) {
-              cursorEnd = selection.anchor.row;
+              cursorEnd = selection.anchor.row + 1;
               if (cursorEnd < cursorStart) {
                 cursorEnd -= cursorStart;
                 cursorStart += cursorEnd;
